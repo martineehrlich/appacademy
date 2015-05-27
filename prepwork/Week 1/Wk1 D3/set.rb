@@ -1,5 +1,5 @@
 class MyHashSet
-  attr_accessor :store
+  attr_reader :store
 
   def initialize
     @store = {}
@@ -10,47 +10,58 @@ class MyHashSet
   end
 
   def include?(element)
-    @store.include?(element)
+    store.include?(element)
   end
 
   def delete(element)
-    if @store.include?(element)
-    @store.delete(element)
+    if self.include?(element)
+    store.delete(element)
       true
     else false
     end
   end
 
   def to_a
-    @store.to_a
+    store.keys
   end
 
   def union(set2)
-    @store.merge(set2.store)
+    new_set = MyHashSet.new
+    self.to_a.each { |el| new_set.insert(el) }
+    set2.to_a.each { |el| new_set.insert(el) }
+    new_set
   end
 
   def intersect(set2)
-    @store.select do |k, v|
-      set2.store.include?(k)
+    new_set = MyHashSet.new
+    self.to_a.each do |el|
+      if set2.include?(el)
+        new_set.insert(el)
+      end
     end
+    new_set
   end
 
   def minus(set2)
-    @store.select do |k, v|
-     !set2.store.include?(k)
+    new_set = MyHashSet.new
+    self.to_a.each do |el|
+     if !set2.include?(el)
+      new_set.insert(el)
     end
+    end
+    new_set
   end
 
 end
 
-new_set = MyHashSet.new
+newe_set = MyHashSet.new
 newer_set = MyHashSet.new
 
-new_set.insert(:key)
-new_set.insert(:banana)
+newe_set.insert(:key)
+newe_set.insert(:banana)
 newer_set.insert(:key2)
 newer_set.insert(:key)
 
-puts new_set.union(newer_set)
-puts new_set.intersect(newer_set)
-puts new_set.minus(newer_set)
+puts newe_set.union(newer_set)
+puts newe_set.intersect(newer_set)
+puts newe_set.minus(newer_set)
