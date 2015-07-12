@@ -1,0 +1,54 @@
+require 'byebug'
+require 'launchy'
+
+def get_user
+
+  begin
+    # debugger
+    puts "Input your email:"
+    email = gets.chomp
+    user = User.find_by_email(email)
+  rescue ActiveRecord::RecordNotFound
+    puts "Invalid email"
+    retry
+  end
+    user
+end
+
+def get_action
+  action = nil
+  until action == 0 || action == 1
+    puts "What do you want to do?"
+    puts "0. Create shortened URL"
+    puts "1. Visit shortened URL"
+    action = gets.chomp.to_i
+  end
+  action
+end
+
+def create_url(user)
+  puts "Type in your long URL"
+  long_url = gets.chomp
+  puts ShortenedUrl.create_for_user_and_long_url!(user, long_url).short_url
+end
+
+def visit_url(user)
+  begin
+    puts "Type in the shortened URL"
+    short_url = gets.chomp
+    url = ShortenedUrl.find_by_short_url(short_url)
+  rescue ActiveRecord::RecordNotFound
+    puts "Invalid URL"
+    retry
+  end
+  Visit.record_visit!(user, url)
+  Launchy.open(url.long_url)
+end
+
+def run
+  user = get_user
+  action = get_action
+  action == 0 ? create_url(user) : visit_url(user)
+end
+
+run
