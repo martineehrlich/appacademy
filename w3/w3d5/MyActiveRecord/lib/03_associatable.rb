@@ -14,7 +14,7 @@ class AssocOptions
   end
 
   def table_name
-    class_name.constantize.table_name
+    model_class.table_name
   end
 end
 
@@ -22,7 +22,7 @@ class BelongsToOptions < AssocOptions
   def initialize(name, options = {})
     defaults = {
      :primary_key => :id,
-     :class_name => name.capitalize,
+     :class_name => name.to_s.singularize.capitalize,
      :foreign_key => "#{name}_id".to_sym
     }
     settings = defaults.merge(options)
@@ -49,7 +49,7 @@ module Associatable
   # Phase IIIb
   def belongs_to(name, options = {})
     options = BelongsToOptions.new(name, options)
-    #class scope
+    assoc_options[name] = options
     define_method(name) do
       options.model_class.where(options.primary_key => self.send(options.foreign_key)).first
     end
@@ -67,7 +67,7 @@ module Associatable
   end
 
   def assoc_options
-    # Wait to implement this in Phase IVa. Modify `belongs_to`, too.
+    @assoc_options ||= {}
   end
 end
 
