@@ -1,0 +1,32 @@
+<% action = new_post.persisted? ? post_url(new_post) : posts_url(new_post) %>
+<% submit_value = new_post.persisted? ? 'Update Post' : 'Submit Post' %>
+<form action='<%=action%>' method="post">
+  <%= auth_token %>
+<% if new_post.persisted? %>
+  <input type="hidden" name="_method" value="patch">
+<%end %>
+
+<label>Title
+  <input type="text" name="post[title]" value="<%= new_post.title %>">
+</label><br>
+
+<label>Which Subs do you want to post to?
+<% subs.each do |sub| %>
+<label><%= sub.title %>
+<input type="checkbox" name="post[sub_ids][]" value="<%=sub.id%>" <%= 'checked' if new_post.subs.include?(sub) %>>
+</label>
+<% end %>
+</label><br>
+
+<label>Url
+  <input type="text" name="post[url]" value="<%= new_post.url %>">
+</label><br>
+
+<label>Content
+<textarea name="post[content]" rows="8" cols="40">
+  <%= new_post.content %>
+</textarea>
+</label><br>
+
+  <input type="submit" value="<%=submit_value%>">
+</form>

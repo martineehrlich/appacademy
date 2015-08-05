@@ -1,0 +1,34 @@
+<h2>All about <%=@cat.name%></h2>
+
+<table style='width:100%'>
+  <tr>
+    <% @cat.show_attributes.each do |k, v| %>
+    <td><%=k%></td>
+    <%end%>
+  </tr>
+  <tr>
+    <% @cat.show_attributes.each do |k, v| %>
+    <td><%=v%></td>
+    <%end%>
+  </tr>
+</table>
+
+<h2><%=@cat.name%> rental requests</h2>
+<table style='width:100%'>
+  <tr>
+    <td>Start Date</td>
+    <td>End Date</td>
+    <td>Rental Status</td>
+  </tr>
+  <% @cat.cat_rental_requests.order(:start_date).each do |request| %>
+  <tr>
+    <td><%=request.start_date%></td>
+    <td><%=request.end_date%></td>
+    <td><%=request.status%></td>
+    <% if request.status == 'PENDING' %>
+      <td><%= button_to "Approve", approve_url(request) %></td>
+      <td><%= button_to "Deny", deny_url(request), method: :deny %></td>
+    <%end%>
+  </tr>
+  <%end%>
+</table>

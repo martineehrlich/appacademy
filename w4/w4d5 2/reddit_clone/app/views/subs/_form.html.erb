@@ -1,0 +1,15 @@
+<% action = @sub.persisted? ? sub_url(@sub) : subs_url %>
+<% method = @sub.persisted? ? "PATCH" : "POST" %>
+<% submit_name = @sub.persisted? ? "Update Sub" : "Create Sub" %>
+
+<form action="<%= action %>" method="post">
+  <input type="hidden" name="_method" value="<%= method %>">
+  <%= auth_token %>
+  <label>Title
+    <input type="text" name="sub[title]" value="<%= @sub.title %>">
+  </label>
+  <label>Description
+    <textarea name="sub[description]"><%= @sub.description %></textarea>
+  </label>
+  <input type="submit" value="<%= submit_name %>">
+</form>

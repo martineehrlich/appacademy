@@ -1,0 +1,41 @@
+/* PHASE 8: Thumbs */
+
+.profile-thumb {
+  margin-top: 20px;
+}
+.profile-thumb li {
+  width: 60px;
+  float: left;
+  margin: 0 0 10px 0;
+}
+
+.thumb img{
+  border-radius: 5px;
+  border: 1px solid black;
+}
+
+.profile-thumb li:nth-child(3n-1) {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.thumb:before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: -7px;
+  transform: translateX(-50%);
+}
+
+.thumb:after {
+  content: attr(title);
+  position: absolute;
+  left: 50%;
+  top: -7px;
+  transform: translateX(-50%);
+  bottom: 65px;
+}
+
+.thumb:hover:before, .thumb:hover:after {
+  display: block;
+}

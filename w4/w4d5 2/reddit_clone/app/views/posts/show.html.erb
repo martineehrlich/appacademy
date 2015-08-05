@@ -1,0 +1,7 @@
+<%= render 'posts/post', new_post: @post, post: @post %>
+
+<%= render 'comments/form', comment: @comment, parent_comment: nil %>
+<h4>Comments</h4>
+<% @comments.each do |comment| %>
+  <%= render 'comments/comment', comment: comment %>
+<% end %>
