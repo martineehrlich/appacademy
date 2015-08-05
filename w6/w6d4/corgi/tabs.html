@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>My Cool Website</title>
+    <script src="./jquery-2.1.1.js"></script>
+    <script src="./tab.js"></script>
+    <link href="./tabs.css" rel="stylesheet" type="text/css">
+  </head>
+
+  <body>
+    <ul class='tabs' data-content-tabs="content-tabs">
+      <li><a href='javascript:void(0);' for='#goldenretriever' class="active">Golden Retriever</a></li>
+      <li><a href='javascript:void(0);' for='#pitbull'>Pitbull</a></li>
+    <li><a href='javascript:void(0);' for='#chihuahua'>Chihuahua</a></li>
+  </ul>
+    <div id="content-tabs">
+      <div class="tab-pane active" id="goldenretriever">
+        <p>
+          Playful and nice
+        </p>
+      </div>
+      <div class="tab-pane" id="pitbull">
+        <p>
+          Mean and aggressive
+        </p>
+      </div>
+      <div class="tab-pane" id="chihuahua">
+          <p>
+            Ambiguous and indecisive
+          </p>
+      </div>
+    </div>
+    <script>
+      $(function() {
+          $('.tabs').tabs();
+        })
+    </script>
+</body>
+</html>

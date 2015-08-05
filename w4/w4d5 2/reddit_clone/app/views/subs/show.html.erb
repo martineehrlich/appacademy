@@ -1,0 +1,19 @@
+<h2><%= @sub.title %></h2>
+
+<p>
+  <%= @sub.description %>
+</p>
+
+<h4>Make a Post</h4>
+<%= render 'posts/form', new_post: @new_post, subs: @subs %>
+
+<h4>Posts about <%= @sub.title %></h4>
+<% @posts.each do |post| %>
+<%= render 'posts/post', post: post %>
+<% end %>
+<% if current_user.id == @sub.user_id %>
+ <p>
+   <%= link_to "Edit Sub", edit_sub_url(@sub) %>
+ </p>
+<% end %>
+ <%= link_to "All Subs", subs_url %>

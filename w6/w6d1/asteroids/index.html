@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <script src="lib/util.js"></script>
+    <script src="lib/movingObject.js"></script>
+    <script src="lib/asteroid.js"></script>
+    <script src="lib/ship.js"></script>
+    <script src="lib/game.js"></script>
+    <script src="lib/gameView.js"></script>
+  </head>
+
+  <body>
+  <canvas id="game-canvas"></canvas>
+    <script>
+    var canvasEl = document.getElementsByTagName("canvas")[0];
+     canvasEl.height = window.innerHeight;
+     canvasEl.width = window.innerWidth;
+     new Asteroids.GameView(
+       canvasEl.width,
+       canvasEl.height,
+       canvasEl).start();
+     </script>
+  </body>
+</html>
