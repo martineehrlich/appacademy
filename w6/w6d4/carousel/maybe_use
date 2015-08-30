@@ -1,0 +1,10 @@
+<div class="btn-group">
+    <button type="button" class="btn btn-default dropdown-toggle override-bootstrap" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Category <span class="caret"></span>
+    </button>
+    <ul class="list-group dropdown-menu">
+      <% categories.forEach(function (category) { %>
+        <li class="art-form-category"><%=category.escape("name")%></li>
+    <% }) %>
+    </ul>
+  </div>  piece called </h2>
